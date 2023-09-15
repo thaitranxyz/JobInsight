@@ -1,0 +1,70 @@
+﻿@page
+@using JobInsight.Model;
+@model JobInsight.Pages.Applications.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Application</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Application.Company" class="control-label"></label>
+                <input asp-for="Application.Company" class="form-control" />
+                <span asp-validation-for="Application.Company" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.Position" class="control-label"></label>
+                <input asp-for="Application.Position" class="form-control" />
+                <span asp-validation-for="Application.Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.Progress" class="control-label"></label>
+                <input asp-for="Application.Progress" class="form-control" />
+                <span asp-validation-for="Application.Progress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.Status" class="control-label"></label>
+                <input asp-for="Application.Status" class="form-control" />
+                <span asp-validation-for="Application.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.Url" class="control-label"></label>
+                <input asp-for="Application.Url" class="form-control" />
+                <span asp-validation-for="Application.Url" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.Note" class="control-label"></label>
+                <input asp-for="Application.Note" class="form-control" />
+                <span asp-validation-for="Application.Note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.Result" class="control-label"></label>
+                @Html.DropDownListFor(model => model.Application.Result, Enum.GetValues(typeof(Result)).Cast<Result>().Select(e => new SelectListItem
+                {
+                Text = e.ToString(),
+                Value = ((int)e).ToString()
+                }), "Select an option", new { @class = "form-control" })
+                @*<input asp-for="Application.Result" class="form-control" />*@
+                <span asp-validation-for="Application.Result" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-5">
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

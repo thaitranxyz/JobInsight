@@ -1,0 +1,114 @@
+﻿@page
+@model JobInsight.Pages.Applications.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Filter
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" asp-page="./Index" asp-route-sortOrder="@Model.DateSort">On Going</a></li>
+        <li><a class="dropdown-item" href="#">Date descending</a></li>
+    </ul>
+</div>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Application[0].Company)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Application[0].Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Application[0].Progress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Application[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Application[0].Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Application[0].Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Application[0].Result)
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                    @Html.DisplayNameFor(model => model.Application[0].DateApplied)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Application) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Progress)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Status)*@
+                    <a href="#"><span class="badge rounded-pill bg-primary">@Html.DisplayFor(modelItem => item.Status)</span></a>
+            </td>
+                <td style="overflow-x:scroll;max-width:20em;">
+                    <a href="@Html.DisplayFor(modelItem => item.Url)" target="_blank">
+                        @Html.DisplayFor(modelItem => item.Url)
+
+                    </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                    @if (item.Result == "3")
+                    {
+                        <span class="badge rounded-pill bg-primary">Ghosted &#128123;</span>
+                    }
+                    @if (item.Result == "2")
+                    {
+                        <span class="badge rounded-pill bg-danger">Failed</span>
+                    }
+                    @if (item.Result == "1")
+                    {
+                        <span class="badge rounded-pill bg-success">Success</span>
+                    }
+                    @if (item.Result == "0")
+                    {
+                        <span class="badge rounded-pill bg-secondary">Not ready</span>
+                    }
+                    @*<span class="badge rounded-pill bg-primary">@Html.DisplayTextFor(modelItem => item.Result)</span>*@
+                    @*<span class="badge rounded-pill bg-primary">@Html.DisplayNameFor(modelItem => item.Result)</span>*@
+
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateApplied)
+                </td>
+            <td>
+                <a class="badge bg-primary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
+                <a class="badge bg-info" asp-page="./Details" asp-route-id="@item.Id">Details</a> 
+                <a class="badge bg-warning" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
