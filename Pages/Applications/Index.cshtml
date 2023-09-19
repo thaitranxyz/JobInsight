@@ -11,8 +11,8 @@
         Filter
     </button>
     <ul class="dropdown-menu">
-        <li><a class="dropdown-item" asp-page="./Index" asp-route-sortOrder="@Model.DateSort">On Going</a></li>
-        <li><a class="dropdown-item" href="#">Date descending</a></li>
+        <li><a class="dropdown-item" asp-page="./Index" asp-route-filter="@Model.Ghosted">Ghosted</a></li>
+        <li><a class="dropdown-item" asp-page="./Index" asp-route-filter="@Model.NotReady">Not Ready</a></li>
     </ul>
 </div>
 
