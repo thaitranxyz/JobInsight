@@ -1,9 +1,12 @@
 ﻿@page
+@using JobInsight.Model;
 @model JobInsight.Pages.Applications.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
+
+
 
 <h1>Index</h1>
 <div class="dropdown">
@@ -15,7 +18,11 @@
         <li><a class="dropdown-item" asp-page="./Index" asp-route-filter="@Model.NotReady">Not Ready</a></li>
     </ul>
 </div>
-
+@*
+<form method="post" asp-page-handler="Destroy">
+    <input type="submit" class="btn btn-danger" value="Destroy"/>
+</form>
+*@
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -36,6 +43,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Application[0].Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Application[0].JobDescription)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Application[0].Note)
@@ -62,13 +72,20 @@
             </td>
             <td>
                 @*@Html.DisplayFor(modelItem => item.Status)*@
-                    <a href="#"><span class="badge rounded-pill bg-primary">@Html.DisplayFor(modelItem => item.Status)</span></a>
+                    
+                    <a href="#"><span class="badge rounded-pill bg-primary">@Html.DisplayTextFor(modelItem => item.Status)</span></a>
             </td>
                 <td style="overflow-x:scroll;max-width:20em;">
                     <a href="@Html.DisplayFor(modelItem => item.Url)" target="_blank">
                         @Html.DisplayFor(modelItem => item.Url)
 
                     </a>
+                </td>
+            <td>
+                    <a onclick="@Model.GetJobDescription(item.Id)" class="badge bg-primary" data-toggle="modal" data-target="#myModal">
+                        View JD
+                    </a>
+                    
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Note)
@@ -108,3 +125,25 @@
 </table>
 
 
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Title</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>@Html.Raw(Model.JobDescription)</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -30,6 +30,12 @@
             @Html.DisplayFor(model => model.Application.Status)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.JobDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.Raw(Model.Application.JobDescription)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Application.Url)
         </dt>
         <dd class="col-sm-10">

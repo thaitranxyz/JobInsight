@@ -37,6 +37,10 @@ namespace JobInsight.Migrations
                     b.Property<DateTime>("DateApplied")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("JobDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Note")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -49,9 +53,8 @@ namespace JobInsight.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Url")
                         .IsRequired()

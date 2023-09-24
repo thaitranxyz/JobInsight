@@ -41,12 +41,15 @@
                 <span asp-validation-for="Application.Note" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Application.JobDescription" class="control-label"></label>
+                <textarea asp-for="Application.JobDescription" class="form-control" />
+                <span asp-validation-for="Application.JobDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Application.Result" class="control-label"></label>
-                @Html.DropDownListFor(model => model.Application.Result, Enum.GetValues(typeof(Result)).Cast<Result>().Select(e => new SelectListItem
-                {
-                Text = e.ToString(),
-                Value = ((int)e).ToString()
-                }), "Select an option", new { @class = "form-control" })
+                <select class="form-control" asp-for="Application.Result" asp-items="@Html.GetEnumSelectList<Result>()">
+                    <option value=""></option>
+                </select>
                 @*<input asp-for="Application.Result" class="form-control" />*@
                 <span asp-validation-for="Application.Result" class="text-danger"></span>
             </div>

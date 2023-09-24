@@ -29,12 +29,16 @@ namespace JobInsight.Pages.Applications
             }
 
             var application = await _context.Application.FirstOrDefaultAsync(m => m.Id == id);
+
+
             if (application == null)
             {
                 return NotFound();
             }
             else 
             {
+                application.JobDescription = application.JobDescription.Replace(@"\n", "<br>");
+
                 Application = application;
             }
             return Page();
