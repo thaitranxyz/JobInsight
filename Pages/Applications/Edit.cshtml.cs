@@ -36,6 +36,8 @@ namespace JobInsight.Pages.Applications
                 return NotFound();
             }
             Application = application;
+
+            Application.JobDescription = Application.JobDescription.Replace(@"\n", "\r\n");
             return Page();
         }
 
@@ -48,10 +50,13 @@ namespace JobInsight.Pages.Applications
                 return Page();
             }
 
+
+            await Console.Out.WriteLineAsync(Application.JobDescription);
             _context.Attach(Application).State = EntityState.Modified;
 
             try
             {
+                
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

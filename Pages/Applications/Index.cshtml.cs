@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using JobInsight.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using JobInsight.Data;
-using JobInsight.Model;
-using Microsoft.Identity.Client;
-using Microsoft.Extensions.Logging.Abstractions;
-using NuGet.Versioning;
 
 namespace JobInsight.Pages.Applications
 {
@@ -30,7 +22,7 @@ namespace JobInsight.Pages.Applications
 
         public IList<Application> Application { get;set; } = default!;
 
-        public async Task OnGetAsync(string sortOrder, string filter)
+        public async Task OnGetAsync(string sortOrder, string filter, int? page)
         {
             
             if (_context.Application != null)
@@ -70,13 +62,16 @@ namespace JobInsight.Pages.Applications
                     break;
             }
 
-            foreach (var app in applications)
-            {
-                app.JobDescription = app.JobDescription.Replace(@"\n", "<br>");
-            }
+
+            int pageSize = 10; 
+            int pageNumber = (page ?? 1); 
 
             Application = await applications.AsNoTracking().ToListAsync();
 
+            foreach (var app in Application)
+            {
+                app.JobDescription = app.JobDescription.Replace(@"\n", "<br>");
+            }
         }
 
         public async Task<IActionResult> OnPostDestroy()

@@ -82,9 +82,32 @@
                     </a>
                 </td>
             <td>
-                    <a onclick="@Model.GetJobDescription(item.Id)" class="badge bg-primary" data-toggle="modal" data-target="#myModal">
+                    <a class="badge bg-primary" data-toggle="modal" data-target="#myModal_@item.Id">
                         View JD
                     </a>
+
+                    <div class="modal fade" id="myModal_@item.Id">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Modal Title</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <p>@Html.Raw(item.JobDescription)</p>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
             </td>
             <td>
@@ -125,25 +148,3 @@
 </table>
 
 
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Modal Title</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <p>@Html.Raw(Model.JobDescription)</p>
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save Changes</button>
-            </div>
-        </div>
-    </div>
-</div>

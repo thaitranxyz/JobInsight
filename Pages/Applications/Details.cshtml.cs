@@ -37,9 +37,9 @@ namespace JobInsight.Pages.Applications
             }
             else 
             {
-                application.JobDescription = application.JobDescription.Replace(@"\n", "<br>");
-
                 Application = application;
+                Application.JobDescription = Application.JobDescription.Replace(@"\n", "<br>");
+
             }
             return Page();
         }
